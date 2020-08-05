@@ -334,7 +334,7 @@ export async function getAdditionalFiles(
   logger.trace({ config }, 'getAdditionalFiles');
   const artifactErrors: ArtifactError[] = [];
   const updatedArtifacts: UpdatedArtifcats[] = [];
-  if (!(packageFiles.npm && packageFiles.npm.length)) {
+  if (!packageFiles.npm?.length) {
     return { artifactErrors, updatedArtifacts };
   }
   if (!config.updateLockFiles) {
@@ -425,7 +425,7 @@ export async function getAdditionalFiles(
     );
     if (res.error) {
       // istanbul ignore if
-      if (res.stderr && res.stderr.includes('No matching version found for')) {
+      if (res.stderr?.includes('No matching version found for')) {
         for (const upgrade of config.upgrades) {
           if (
             res.stderr.includes(
@@ -487,7 +487,7 @@ export async function getAdditionalFiles(
     );
     if (res.error) {
       // istanbul ignore if
-      if (res.stderr && res.stderr.includes(`Couldn't find any versions for`)) {
+      if (res.stderr?.includes(`Couldn't find any versions for`)) {
         for (const upgrade of config.upgrades) {
           /* eslint-disable no-useless-escape */
           if (
@@ -589,7 +589,7 @@ export async function getAdditionalFiles(
     );
     if (res.error) {
       // istanbul ignore if
-      if (res.stdout && res.stdout.includes(`No compatible version found:`)) {
+      if (res.stdout?.includes(`No compatible version found:`)) {
         for (const upgrade of config.upgrades) {
           if (
             res.stdout.includes(
